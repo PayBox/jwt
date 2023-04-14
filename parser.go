@@ -160,7 +160,7 @@ func (p *Parser) ParseUnverified(tokenString string, claims Claims) (token *Toke
 		err = dec.Decode(&claims)
 	}
 	// Handle decode error
-	if err != nil {
+	if err != nil && err.Error() != "EOF" {
 		return token, parts, &ValidationError{Inner: err, Errors: ValidationErrorMalformed}
 	}
 
